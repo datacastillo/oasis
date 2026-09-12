@@ -5,6 +5,9 @@ import { motion } from 'framer-motion';
 import { Droplets, ShieldAlert, Sparkles, Scissors, RefreshCw, Zap } from 'lucide-react';
 import dynamic from 'next/dynamic';
 
+// 1. IMPORTACIÓN DEL WIDGET DE NESSIE (Añadido)
+import { BiomaWidget } from '@/components/BiomaWidget';
+
 // Importación dinámica para evitar el error de SSR en Next.js
 const BiomaScene = dynamic(() => import('../components/3d/BiomaScene'), {
   ssr: false,
@@ -111,6 +114,7 @@ export default function Home() {
       </header>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+        {/* Columna Izquierda: Escena 3D y Stats */}
         <div className="lg:col-span-2 space-y-4">
           
           <BiomaScene bioma={bioma} />
@@ -140,8 +144,14 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Columna Derecha: Widgets y Controles IA */}
         <div className="space-y-4">
-          <motion.div 
+          
+          {/* 2. INSTANCIA DEL WIDGET CONECTADO A LA API (Añadido) */}
+          <BiomaWidget accountId="60d21b46c7e43908355fa000" />
+
+          {/* Tarjeta del Jardinero IA */}
+          <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             className="bg-slate-900/80 backdrop-blur-xl border border-emerald-500/30 p-5 rounded-3xl shadow-xl space-y-4"
@@ -184,6 +194,7 @@ export default function Home() {
             )}
           </motion.div>
 
+          {/* Controles de demo */}
           <div className="bg-slate-900/30 border border-white/5 p-4 rounded-2xl space-y-2">
             <span className="text-xs text-slate-400 block font-semibold">Controles de Demostración</span>
             <div className="flex gap-2">
