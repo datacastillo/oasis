@@ -5,8 +5,11 @@ import { motion } from 'framer-motion';
 import { Droplets, ShieldAlert, Sparkles, Scissors, RefreshCw, Zap } from 'lucide-react';
 import dynamic from 'next/dynamic';
 
+// Importación nombrada corregida con llaves { BiomaWidget }
+import { BiomaWidget } from '@/components/BiomaWidget';
+
 // Importación dinámica para evitar el error de SSR en Next.js
-const BiomaScene = dynamic(() => import('../components/3d/BiomaScene'), {
+const BiomaScene = dynamic(() => import('@/components/3d/BiomaScene'), {
   ssr: false,
   loading: () => (
     <div className="w-full h-[450px] rounded-3xl bg-slate-900 border border-emerald-500/20 flex items-center justify-center shadow-inner">
@@ -141,6 +144,8 @@ export default function Home() {
         </div>
 
         <div className="space-y-4">
+          <BiomaWidget accountId="650000000000000000000000" />
+
           <motion.div 
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
